@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<langs>
+    <lang>
+        <id>1</id>
+        <name>Francais (French)</name>
+        <active>1</active>
+        <isoCode>fr</isoCode>
+        <languageCode>fr-FR</languageCode>
+        <isDefault>1</isDefault>
+        <flags>fr.png</flags>
+    </lang>
+    <lang>
+        <id>2</id>
+        <name>English</name>
+        <active>1</active>
+        <isoCode>en</isoCode>
+        <languageCode>en-US</languageCode>
+        <isDefault>0</isDefault>
+        <flags>bus.png</flags>
+    </lang>
+</langs>

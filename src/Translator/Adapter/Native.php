@@ -6,13 +6,57 @@ use BobbyFramework\Globalisations\Translator\Adapter;
 
 class Native extends Adapter implements AdapterInterface
 {
+    /**
+     * @var
+     */
     protected $_translate;
 
+    /**
+     * @var array
+     */
+    protected $_filesPath = [];
+
+    /**
+     * Native constructor.
+     * @param array $options
+     */
+    public function __construct(array $options)
+    {
+        parent::__construct($options);
+
+        if (false === $this->hasOption('files')) {
+            throw new \Exception("files is required");
+        }
+
+        $this->setFiles($this->getOption('files'));
+
+    }
+
+    /**
+     * @param $filePath
+     */
+    public function setFiles($filePath)
+    {
+        if (true === is_array($filePath)) {
+            $this->_filesPath = array_merge($filePath, $this->_filesPath);
+        } else {
+            $this->_filesPath[] = $filePath;
+        }
+    }
+
+    /**
+     * @param $key
+     * @return mixed
+     */
     public function query($key)
     {
         return $this->_translate[$key];
     }
 
+    /**
+     * @param $file
+     * @throws \Exception
+     */
     private function getFileLang($file)
     {
         // echo $file ;
@@ -31,11 +75,14 @@ class Native extends Adapter implements AdapterInterface
                     }
                 }
             }
-        } else {
-            die('bug');
         }
+
+        
     }
 
+    /**
+     * @return $this
+     */
     public function run()
     {
         foreach ($this->_filesPath as $filePath) {

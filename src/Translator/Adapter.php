@@ -20,24 +20,12 @@ abstract class Adapter
     protected $_options = array();
 
     /**
-     * @var array
-     */
-    protected $_filesPath = [];
-
-    /**
      * Adapter constructor.
      * @param $options
      */
     public function __construct(array $options)
     {
         $this->setOptions($options);
-
-        if (false === $this->hasOption('files')) {
-            throw new \Exception("files is required");
-        }
-
-        $this->setFiles($this->getOption('files'));
-
     }
 
     /**
@@ -55,18 +43,6 @@ abstract class Adapter
     public function hasOption($key)
     {
         return isset ($this->_options[$key]);
-    }
-
-    /**
-     * @param $filePath
-     */
-    public function setFiles($filePath)
-    {
-        if (true === is_array($filePath)) {
-            $this->_filesPath = array_merge($filePath, $this->_filesPath);
-        } else {
-            $this->_filesPath[] = $filePath;
-        }
     }
 
     /**

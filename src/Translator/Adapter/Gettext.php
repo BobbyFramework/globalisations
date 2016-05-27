@@ -9,4 +9,9 @@ class Gettext  implements AdapterInterface
     {
         // TODO: Implement method.
     }
+
+    public function run()
+    {
+        // TODO: Implement run() method.
+    }
 }

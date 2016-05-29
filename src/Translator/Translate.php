@@ -3,7 +3,7 @@ namespace BobbyFramework\Globalisations\Translator;
 
 class Translate
 {
-    private $_adapter;
+    protected $_adapter;
 
     public function __construct(AdapterInterface $adapterInterface)
     {
@@ -12,8 +12,13 @@ class Translate
         $this->_adapter->run();
     }
 
-    public function query($key)
+    public function query($key,$groupName = 'default')
     {
-        return $this->_adapter->query($key);
+        return $this->_adapter->query($key,$groupName);
+    }
+
+    public function getAll()
+    {
+        return $this->_adapter->getAll();
     }
 }

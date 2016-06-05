@@ -1,10 +1,10 @@
 <?php
-namespace BobbyFramework\Globalisations\I18n;
+namespace BobbyFramework\Globalisations\L10n;
 
 use BobbyFramework\Globalisations\AdapterInterface;
 use BobbyFramework\Globalisations\Manager;
 
-class Languages extends Manager
+class Countries extends Manager
 {
     public function __construct(AdapterInterface $adapterInterface)
     {

@@ -1,17 +1,16 @@
 <?php
 namespace BobbyFramework\Globalisations\I18n\Adapter;
 
-use BobbyFramework\Globalisations\I18n\Adapter;
-use BobbyFramework\Globalisations\I18n\AdapterInterface;
-use BobbyFramework\Globalisations\I18n\LanguageEntity;
+use BobbyFramework\Globalisations\AdapterInterface;
+use BobbyFramework\Globalisations\I18n\Language;
+use BobbyFramework\Globalisations\Manager;
 
-class Xml extends Adapter implements AdapterInterface
+class Xml implements AdapterInterface
 {
     protected $_filePath;
 
     public function __construct($filePath = '')
     {
-        parent::__construct();
 
         $this->setFilePath($filePath);
     }
@@ -21,7 +20,7 @@ class Xml extends Adapter implements AdapterInterface
         $this->_filePath = $filePath;
     }
 
-    public function run()
+    public function run(Manager $languages)
     {
         if (!file_exists($this->_filePath)) {
             #todo exception errro
@@ -30,11 +29,18 @@ class Xml extends Adapter implements AdapterInterface
         $langXml = simplexml_load_file($this->_filePath);
 
         foreach ($langXml as $lx) {
-            $l = new LanguageEntity();
+            $l = new Language();
             foreach ($lx as $lx2) {
+
                 $l->{'set' . ucfirst($lx2->getName())}((string)$lx->{$lx2->getName()});
+
+                if (true === $l->isDefault()) {
+                    $languages->setDefault($l);
+                    $languages->setCurrent($l);
+                }
             }
-            $this->add($l);
+            $languages->add($l);
         }
+
     }
 }

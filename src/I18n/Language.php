@@ -2,7 +2,9 @@
 
 namespace BobbyFramework\Globalisations\I18n;
 
-class LanguageEntity implements LanguageInterface
+use BobbyFramework\Globalisations\GlobalisationsInterface;
+
+class Language implements GlobalisationsInterface
 {
     public function setId($val)
     {
@@ -64,9 +66,9 @@ class LanguageEntity implements LanguageInterface
         return $this->languageCode;
     }
 
-    public function getIsDefault()
+    public function isDefault($defaultValue = false)
     {
-        return $this->isDefault;
+        return isset($this->isDefault) ? $this->isDefault : $defaultValue;
     }
 
     public function getFlags()

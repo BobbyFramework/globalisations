@@ -6,10 +6,23 @@ namespace BobbyFramework\Globalisations;
  */
 interface GlobalisationsInterface
 {
+    /**
+     *
+     */
     const STATUS_ENABLED = true;
+    /**
+     *
+     */
     const STATUS_DISABLED = false;
 
+    /**
+     * @param $id
+     * @return int
+     */
     public function setId($id);
 
+    /**
+     * @return boolean
+     */
     public function isDefault();
 }

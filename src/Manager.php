@@ -1,22 +1,51 @@
 <?php
 namespace BobbyFramework\Globalisations;
 
+/**
+ * Class Manager
+ * @package BobbyFramework\Globalisations
+ */
 abstract class Manager
 {
-    protected $_adapter;
-    protected $_default;
-    protected $_data;
-    protected $_current;
+    /**
+     * @var
+     */
+    protected $adapter;
+
+    /**
+     * @var
+     */
+    protected $default;
+
+    /**
+     * @var
+     */
+    protected $data;
+
+    /**
+     * @var
+     */
+    protected $current;
+
+    /**
+     *
+     */
     const KEY = 'id';
 
+    /**
+     * Manager constructor.
+     * @param AdapterInterface $adapterInterface
+     */
     public function __construct(AdapterInterface $adapterInterface)
     {
         $this->setAdapter($adapterInterface);
 
-        $this->_adapter->run($this);
-
+        $this->adapter->run($this);
     }
 
+    /**
+     *
+     */
     public function initialize()
     {
         foreach ($this->getAll() as $language) {
@@ -28,55 +57,92 @@ abstract class Manager
         }
     }
 
+    /**
+     * @param AdapterInterface $adapterInterface
+     */
     public function setAdapter(AdapterInterface $adapterInterface)
     {
-        $this->_adapter = $adapterInterface;
+        $this->adapter = $adapterInterface;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAdapter()
     {
-        return $this->_adapter;
+        return $this->adapter;
     }
 
+    /**
+     * @param GlobalisationsInterface $globalisationsInterface
+     */
     final public function add(GlobalisationsInterface $globalisationsInterface)
     {
-        $this->_data[$globalisationsInterface->getId()] = $globalisationsInterface;
+        $this->data[$globalisationsInterface->getId()] = $globalisationsInterface;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAll()
     {
-        return $this->_data;
+        return $this->data;
     }
+
+    /**
+     * @param $id
+     */
     public function removeById($id)
     {
-        unset($this->_data[$id]);
+        unset($this->data[$id]);
     }
+
+    /**
+     *
+     */
     public function clear()
     {
-        $this->_data = [];
+        $this->data = [];
     }
 
+    /**
+     * @param GlobalisationsInterface $globalisationsInterface
+     */
     public function setDefault(GlobalisationsInterface $globalisationsInterface)
     {
-        $this->_default = $globalisationsInterface;
+        $this->default = $globalisationsInterface;
     }
 
+    /**
+     * @return mixed
+     */
     public function getDefault()
     {
-        return $this->_default;
+        return $this->default;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCurrent()
     {
-        return $this->_current;
+        return $this->current;
     }
 
+    /**
+     * @param GlobalisationsInterface $globalisationsInterface
+     */
     public function setCurrent(GlobalisationsInterface $globalisationsInterface)
     {
-        $this->_current = $globalisationsInterface;
+        $this->current = $globalisationsInterface;
     }
 
-    protected function _set($value, $setKey, $default)
+    /**
+     * @param $value
+     * @param $setKey
+     * @param $default
+     */
+    protected function set($value, $setKey, $default)
     {
         #TODO verif function generate avec $key existe bien
         foreach ($this->getAll() as $elements) {
@@ -87,13 +153,21 @@ abstract class Manager
         }
     }
 
+    /**
+     * @param $value
+     * @param string $key
+     */
     public function setDefaultByValue($value, $key = self::KEY)
     {
-        $this->_set($value, 'Default', $key);
+        $this->set($value, 'Default', $key);
     }
 
+    /**
+     * @param $value
+     * @param string $key
+     */
     public function setCurrentByValue($value, $key = self::KEY)
     {
-        $this->_set($value, 'Current', $key);
+        $this->set($value, 'Current', $key);
     }
 }

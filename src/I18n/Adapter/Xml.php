@@ -1,24 +1,14 @@
 <?php
 namespace BobbyFramework\Globalisations\I18n\Adapter;
 
+use BobbyFramework\Globalisations\AbstractAdapter;
 use BobbyFramework\Globalisations\AdapterInterface;
 use BobbyFramework\Globalisations\I18n\Language;
 use BobbyFramework\Globalisations\Manager;
 
-class Xml implements AdapterInterface
+class Xml extends AbstractAdapter implements AdapterInterface
 {
     protected $_filePath;
-
-    public function __construct($filePath = '')
-    {
-
-        $this->setFilePath($filePath);
-    }
-
-    public function setFilePath($filePath)
-    {
-        $this->_filePath = $filePath;
-    }
 
     public function run(Manager $languages)
     {

@@ -1,8 +1,20 @@
 <?php
+
 namespace BobbyFramework\Globalisations\I18n;
 
+/**
+ * Class LanguagesFactory
+ *
+ * @package BobbyFramework\Globalisations\I18n
+ */
 class LanguagesFactory
 {
+    /**
+     * @param      $key
+     * @param null $options
+     *
+     * @return mixed
+     */
     public static function build($key, $options = null)
     {
         $class = '\\BobbyFramework\\Globalisations\\I18n\\Adapter\\' . $key;
@@ -16,6 +28,7 @@ class LanguagesFactory
                     $obj->$method($value);
                 }
             }
+
             return $obj;
         } else {
             #TODO EXCEPTION

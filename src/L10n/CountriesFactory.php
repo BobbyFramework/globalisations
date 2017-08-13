@@ -1,8 +1,20 @@
 <?php
+
 namespace BobbyFramework\Globalisations\L10n;
 
+/**
+ * Class CountriesFactory
+ *
+ * @package BobbyFramework\Globalisations\L10n
+ */
 class CountriesFactory
 {
+    /**
+     * @param      $key
+     * @param null $options
+     *
+     * @return mixed
+     */
     public static function build($key, $options = null)
     {
         $class = '\\BobbyFramework\\Globalisations\\L10n\\Adapter\\' . $key;
@@ -16,6 +28,7 @@ class CountriesFactory
                     $obj->$method($value);
                 }
             }
+
             return $obj;
         } else {
             #TODO EXCEPTION

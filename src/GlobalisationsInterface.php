@@ -1,7 +1,10 @@
 <?php
+
 namespace BobbyFramework\Globalisations;
+
 /**
  * Interface GlobalisationsInterface
+ *
  * @package BobbyFramework\Globalisations
  */
 interface GlobalisationsInterface
@@ -17,7 +20,6 @@ interface GlobalisationsInterface
 
     /**
      * @param $id
-     * @return int
      */
     public function setId($id);
 

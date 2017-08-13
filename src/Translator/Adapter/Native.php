@@ -1,9 +1,15 @@
 <?php
+
 namespace BobbyFramework\Globalisations\Translator\Adapter;
 
 use BobbyFramework\Globalisations\Translator\AdapterInterface;
 use BobbyFramework\Globalisations\Translator\Adapter;
 
+/**
+ * Class Native
+ *
+ * @package BobbyFramework\Globalisations\Translator\Adapter
+ */
 class Native extends Adapter implements AdapterInterface
 {
     /**
@@ -16,10 +22,12 @@ class Native extends Adapter implements AdapterInterface
      */
     protected $_filesPath = [];
 
-
     /**
      * Native constructor.
+     *
      * @param array $options
+     *
+     * @throws \Exception
      */
     public function __construct(array $options)
     {
@@ -43,11 +51,14 @@ class Native extends Adapter implements AdapterInterface
         } else {
             $this->_filesPath['default'] = $filePath;
         }
+
+        dump($this->_filesPath);
     }
 
     /**
-     * @param $key
+     * @param        $key
      * @param string $groupName
+     *
      * @return mixed
      */
     public function query($key, $groupName = 'default')
@@ -62,8 +73,10 @@ class Native extends Adapter implements AdapterInterface
     public function run()
     {
         foreach ($this->_filesPath as $keyPath => $filePath) {
+
             if (file_exists($filePath)) {
                 $handle = fopen($filePath, "r");
+
                 if ($handle) {
                     while (!feof($handle)) {
                         $buffer = fgets($handle, 4096);
@@ -84,9 +97,10 @@ class Native extends Adapter implements AdapterInterface
                         }
                     }
                 }
-
             }
         }
+
+        dump( $this->_translate);
         return $this;
     }
 

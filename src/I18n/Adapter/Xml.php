@@ -1,4 +1,5 @@
 <?php
+
 namespace BobbyFramework\Globalisations\I18n\Adapter;
 
 use BobbyFramework\Globalisations\AbstractAdapter;
@@ -6,10 +7,23 @@ use BobbyFramework\Globalisations\AdapterInterface;
 use BobbyFramework\Globalisations\I18n\Language;
 use BobbyFramework\Globalisations\Manager;
 
+/**
+ * Class Xml
+ *
+ * @package BobbyFramework\Globalisations\I18n\Adapter
+ */
 class Xml extends AbstractAdapter implements AdapterInterface
 {
+    /**
+     * @var
+     */
     protected $_filePath;
 
+    /**
+     * @param Manager $languages
+     *
+     * @return mixed|void
+     */
     public function run(Manager $languages)
     {
         if (!file_exists($this->_filePath)) {
@@ -24,13 +38,12 @@ class Xml extends AbstractAdapter implements AdapterInterface
 
                 $l->{'set' . ucfirst($lx2->getName())}((string)$lx->{$lx2->getName()});
 
-                if (true === $l->isDefault()) {
+                if ($l->isDefault() === '1') {
                     $languages->setDefault($l);
                     $languages->setCurrent($l);
                 }
             }
             $languages->add($l);
         }
-
     }
 }

@@ -1,8 +1,10 @@
 <?php
+
 namespace BobbyFramework\Globalisations;
 
 /**
  * Class Manager
+ *
  * @package BobbyFramework\Globalisations
  */
 abstract class Manager
@@ -34,6 +36,7 @@ abstract class Manager
 
     /**
      * Manager constructor.
+     *
      * @param AdapterInterface $adapterInterface
      */
     public function __construct(AdapterInterface $adapterInterface)
@@ -154,7 +157,7 @@ abstract class Manager
     }
 
     /**
-     * @param $value
+     * @param        $value
      * @param string $key
      */
     public function setDefaultByValue($value, $key = self::KEY)
@@ -163,7 +166,7 @@ abstract class Manager
     }
 
     /**
-     * @param $value
+     * @param        $value
      * @param string $key
      */
     public function setCurrentByValue($value, $key = self::KEY)

@@ -1,4 +1,5 @@
 <?php
+
 namespace BobbyFramework\Globalisations\L10n\Adapter;
 
 use BobbyFramework\Globalisations\AbstractAdapter;
@@ -6,8 +7,18 @@ use BobbyFramework\Globalisations\AdapterInterface;
 use BobbyFramework\Globalisations\L10n\Country;
 use BobbyFramework\Globalisations\Manager;
 
+/**
+ * Class Xml
+ *
+ * @package BobbyFramework\Globalisations\L10n\Adapter
+ */
 class Xml extends AbstractAdapter implements AdapterInterface
 {
+    /**
+     * @param Manager $languages
+     *
+     * @return mixed|void
+     */
     public function run(Manager $languages)
     {
         if (!file_exists($this->_filePath)) {
@@ -30,6 +41,5 @@ class Xml extends AbstractAdapter implements AdapterInterface
             }
             $languages->add($l);
         }
-
     }
 }

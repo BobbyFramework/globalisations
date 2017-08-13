@@ -7,8 +7,23 @@ require APP_PATH . '/vendor/autoload.php';
 use BobbyFramework\Globalisations\Translator\Translate;
 use BobbyFramework\Globalisations\Translator\TranslateFactory;
 
-$translate = new Translate(TranslateFactory::BuildNative(array(
-    'filePath' => 'translate.lng'
-)));
+// One file languages
+$adapter = TranslateFactory::BuildNative([
+    'files' => 'translate.lng'
+]);
 
-print_r($translate->query('helloWorl'));
+$translate = new Translate($adapter);
+
+dump($translate->query('hello'));
+
+// Multiple file language
+$adapter = TranslateFactory::BuildNative([
+    'files' => [
+        'default' => 'translate.lng',
+        'test' => 'test.lng'
+    ]
+]);
+
+$translate = new Translate($adapter);
+
+dump($translate->query('hello'));
